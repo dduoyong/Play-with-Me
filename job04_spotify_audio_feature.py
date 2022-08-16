@@ -10,8 +10,8 @@ import os
 
 
 # ---- spotify access & getting access token ----
-client_id = "2d917608a1e24767b4b51a572f225908"
-client_pw = "be22619bb01440ca9731d339949e3da2"
+client_id = "input your client id"
+client_pw = "input your client pw"
 endpoint = "https://accounts.spotify.com/api/token"
 
 encoded = base64.b64encode("{}:{}".format(client_id, client_pw).encode('utf-8')).decode('ascii')
@@ -21,10 +21,9 @@ payload = {"grant_type": "client_credentials"}
 
 response = requests.post(endpoint, data=payload, headers=headers)
 access_token = json.loads(response.text)['access_token']
-# {'access_token': 'BQBP8qt9-1RvO_ecrG-Ic2Kd9YxsSmbZj1dL6FxqkTU5SjCaXHUYmA2OvTX3CzaXL8vqAt5GnE-Ze-xMhsSXkggiSeaa53hB6FMVpYLVx6smWlT1aI0', 'token_type': 'Bearer', 'expires_in': 3600}
 
-os.environ["SPOTIPY_CLIENT_ID"] = "2d917608a1e24767b4b51a572f225908"
-os.environ["SPOTIPY_CLIENT_SECRET"] = "be22619bb01440ca9731d339949e3da2"
+os.environ["SPOTIPY_CLIENT_ID"] = "input your client id"
+os.environ["SPOTIPY_CLIENT_SECRET"] = "input your client pw"
 
 
 df = pd.read_csv('./Melon/03_lyric_concat_data/RandM_lyric.csv')

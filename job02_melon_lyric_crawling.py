@@ -82,7 +82,7 @@ for i in range(start,end):
         # ---- 검색 버튼 클릭 ----
         div = driver.find_element("css selector", "#gnb > fieldset > button.btn_icon.search_m > span").click()
         time.sleep(2)
-        print(songName[i]+', '+singerName[i], "01")
+        print(songName[i]+','+singerName[i], "01")
 
         try:
             # ---- 노래 가사 보기 버튼 클릭 ----
@@ -139,7 +139,7 @@ for i in range(start,end):
             # ---- 검색 버튼 클릭 ----
             div = driver.find_element("css selector", "#header_wrap > div.wrap_search_field > fieldset > button.btn_icon.search_m > span").click()
             time.sleep(2)
-            print(songName[i] + ', ' + singerName[i], "02")
+            print(songName[i]+','+singerName[i], "02")
 
             try:
                 # ---- 노래 가사 보기 버튼 클릭 ----
