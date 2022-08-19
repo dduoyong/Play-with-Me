@@ -11,10 +11,10 @@ import re
 
 music_genre_lst = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Pop', 'RandB_S', 'RandH', 'RandM']
 
-for i in range(6, 7):
+for i in range(0, 10):
 
     gn = music_genre_lst[i]
-    df = pd.read_csv('./melon/03_melon_lyric_concat_data/{}_lyric_concat.csv'.format(gn))
+    df = pd.read_csv('./Melon/05_6emo_data/{}_6emo.csv'.format(gn))
     df.info()
 
 
@@ -38,10 +38,16 @@ for i in range(6, 7):
 
         #  -- 모든 영어 텍스트 소문자로 대체 --
         small_lyrics = lyrics.lower()
-        print('small_lyrics :', small_lyrics)
+        # print('small_lyrics :', small_lyrics)
 
 
         # -- 토큰화 --
+        #mac 환경 다운로드
+        # nltk.download('punkt')
+        # nltk.download('omw-1.4')
+        # nltk.download('stopwords')
+
+        # window 환경 다운로드
         # nltk.download('tagsets')
         # nltk.download('averaged_perceptron_tagger')
         # nltk.download('wordnet')
@@ -52,7 +58,7 @@ for i in range(6, 7):
         # -- 품사 tagging --
         tag_words = pos_tag(token_words)
         # print(tag_words)
-        # exit()
+
         df_token = pd.DataFrame(tag_words, columns=['word', 'class'])
         # -- 명사(단복수)/고유명사(단복수)/동사(원형,과거,현재분사,과거분사)/형용사(비교급,최고급)/부사(비교급,최고급) 의 품사만 살림 --
         # df_token = df_token[(df_token['class'] == 'NN') | (df_token['class'] == 'NNS') |
@@ -104,7 +110,8 @@ for i in range(6, 7):
                            'sayla', 'lee', 'du', 'ahhh', 'pappapara', 'uhuhuh', 'uck', 'yayayaya', 'kiki', 'ya', 'yuh', 'lyricfind', 'bizzionary',
                            'ba', 'wrah', 'cuz', 'ah', 'capls', 'wooooo', 'imma', 'aaa', 'bb', 'woo', 'emm', 'ai', 'ha', 'hoo', 'wow', 'da', 'shubidubi',
                            'bubibu', 'hee', 'ohh', 'oather', 'uaagh', 'daralala', 'nananananana', 'diggy', 'loo', 'oooohhh', 'hanalee', 'tennessee',
-                           'ooonnnn', 'cos', 'youuuuuuuuu', 'sex', 'ayy', 'ayyy', 'afterthe', 'shhhhh', 'ugh', 'oowah', 'mimi', 'fraulein', 'jaja' 'prrrr', 'lalalalalalalalalalala'])
+                           'ooonnnn', 'cos', 'youuuuuuuuu', 'sex', 'ayy', 'ayyy', 'afterthe', 'shhhhh', 'ugh', 'oowah', 'mimi', 'fraulein', 'jaja' 'prrrr', 'lalalalalalalalalalala',
+                           'Turururu', 'Wuh', 'Hoo', 'uaagh', 'WAWAWAWAWAWAWAWAWAWA', 'hm', 'DDA', 'hoohoo', 'LaLaLaLaLaLaLaLa'])
 
 
         result = []
@@ -118,8 +125,8 @@ for i in range(6, 7):
         # print(English_lyric)
 
     df['English_clean_lyric'] = English_lyric
-    df = df[['artist', 'title', 'English_clean_lyric']]
+    df = df[['artist', 'title', 'emo', 'track_id', 'English_clean_lyric']]
     df.dropna(inplace=True)
-    df.to_csv('./melon/04_melon_clear_lyric/{}_clean_eng_lyric.csv'.format(gn), index=False)
+    df.to_csv('./Melon/06_clear_lyric_data/{}_clean_eng_lyric.csv'.format(gn), index=False)
     df.info()
 
