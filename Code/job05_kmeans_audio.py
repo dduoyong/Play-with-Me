@@ -7,7 +7,7 @@ import seaborn as sns
 from yellowbrick.cluster import KElbowVisualizer
 
 
-df = pd.read_csv('./Melon/05_lyric_preprocessing_data/melon_clean_all_eng_lyric.csv')
+df = pd.read_csv('../Melon/04_audio_features_data/Adultpop_lyric_and_audio.csv')
 # df.info()
 
 # ---- audio feature 변수 ----
@@ -24,9 +24,7 @@ k = 6
 kmeans = KMeans(n_clusters = k, random_state = 0)
 clusters = kmeans.fit(data_scale)
 # k=4 >> 기쁨 슬픔 우울 편안함
-# k=6 >> angry,disgusted,surprised,fearful,happy,sad
-#     >> high valence sound more positive (e.g. happy, cheerful, euphoric)
-#     >> low valence sound more negative (e.g. sad, depressed, angry)
+# k=6 >> ['Energetic', 'Happy', 'Comfortable', 'Chilling', 'Depressed', 'Sad']
 
 # -- 클러스터 값 원본 df에 추가 --
 df['cluster'] = clusters.labels_

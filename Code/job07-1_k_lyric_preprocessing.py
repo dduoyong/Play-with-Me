@@ -4,19 +4,18 @@ import re
 
 music_genre_lst = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Pop', 'RandB_S', 'RandH', 'RandM']
 
-for i in range(0, 1):
+for i in range(0, 10):
 
     gn = music_genre_lst[i]
-    df = pd.read_csv('./Melon/05_6emo_data/{}_6emo.csv'.format(gn))
-    # df.info()
-
+    df = pd.read_csv('./Melon/05_6emo_data/{}_lyric_and_emo.csv'.format(gn))
 
     # ---- 한국어 가사 stopwords ----
-    df_stopwords = pd.read_csv('./melon_lyrics_kor_stopwords.csv')
+    df_stopwords = pd.read_csv('../Melon/06_lyric_preprocessing_data/melon_lyrics_kor_stopwords.csv')
     k_stopwords = list(df_stopwords['stopwords'])
-    k_stopwords = k_stopwords + ['있다', '따위', '니야', '그나마', '문턱', '수행', '임무',
-                                 '에에에에', '워워워', '라라라라', '라라라', '마마마라', '너너너너너', '라라라라라라', '아아아아아냐',
-                                 '워어어오', '하나나나나','빙글빙글빙글빙글빙글빙글빙']
+    k_stopwords = k_stopwords + ['있다', '따위', '니야', '그나마', '문턱', '수행', '임무', '에에에에', '워워워', '라라라라',
+                                 '라라라', '마마마라', '너너너너너', '라라라라라라', '아아아아아냐', '워어어오', '하나나나나',
+                                 '빙글빙글빙글빙글빙글빙글빙', '온유', '종현', '민호', '태민']
+
     # ---- 한국어 가사 토큰화 및 불용어 제거 ----
     okt = Okt()
     Korean_lyric = []
@@ -43,8 +42,8 @@ for i in range(0, 1):
         Korean_lyric.append(cleaned_sentence)
 
 
-    df['Korean_clean_lyric'] = Korean_lyric
-    df = df[['artist', 'title', 'emo', 'track_id', 'Korean_clean_lyric']]
+    df['Clean_lyric'] = Korean_lyric
+    df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'danceability', 'energy', 'loudness', 'acousticness', 'valence', 'tempo']]
     df.dropna(inplace=True)
-    df.to_csv('./06_clear_lyric_data/{}_clean_kor_lyric.csv'.format(gn), index=False)
+    df.to_csv('./Melon/06_lyric_preprocessing_data/KOR/{}_clean_kr_lyric.csv'.format(gn), index=False)
     df.info()

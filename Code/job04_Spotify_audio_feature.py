@@ -26,7 +26,7 @@ os.environ["SPOTIPY_CLIENT_ID"] = "input your client id"
 os.environ["SPOTIPY_CLIENT_SECRET"] = "input your client pw"
 
 
-df = pd.read_csv('./Melon/03_lyric_concat_data/RandM_lyric.csv')
+df = pd.read_csv('../Melon/03_lyric_concat_data/RandM_lyric.csv')
 df.info()
 # ---- 오류난 경우 해당 행 확인용 ----
 # print(df['track_id_url'][37])
