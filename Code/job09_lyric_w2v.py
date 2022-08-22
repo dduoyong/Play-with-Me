@@ -8,7 +8,7 @@ music_genre_list = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Po
 for i in range(0,10):
 
     gn = music_genre_list[i]
-    df = pd.read_csv('./Melon/07_clean_gn_concat/{}_fin.csv'.format(gn))
+    df = pd.read_csv('../Melon/07_clean_gn_concat/{}_fin.csv'.format(gn))
     # df.info()
 
     # ---- 'Clean lyric' null값 처리 ----
@@ -30,6 +30,6 @@ for i in range(0,10):
     embedding_model = Word2Vec(cleaned_kr_lyric, min_count=3, vector_size=40, sg=0, batch_words=1000, window=20, workers=8, epochs=100)
 
     # -- 모델 저장 및 확인 --
-    embedding_model.save('./Melon/Models/{}_w2v.model'.format(gn))
+    embedding_model.save('../Melon/Models/{}_w2v.model'.format(gn))
     print(list(embedding_model.wv.index_to_key))
     print(len(embedding_model.wv.index_to_key))

@@ -35,6 +35,7 @@ df = pd.read_csv('../Melon/07_clean_gn_concat/RandM_fin.csv')
 track_id = df['track_id']
 
 album_art = []
+release_date = []
 cnt = 0
 
 
@@ -62,13 +63,24 @@ for i in range(len(df)):
 
     except:
         album_art.append(" ")
-        print("0")
+        print("none images url")
+
+    # -- release date 찾으면 append 아니면 비우기 --
+    try:
+        release = re.findall('"release_date" : "(.*)\"', r.text)
+        print(release[0])
+        release_date.append(release[0])
+        cnt += 1
+        print(cnt)
+    except:
+        release_date.append(" ")
+        print("none date")
 
 
 df['album_art'] = album_art
-df = df[['artist','title','Clean_lyric','emo','track_id','album_art','danceability','energy','loudness','acousticness','valence','tempo']]
+df['release_date'] = release_date
+df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'track_url', 'album_art', 'release_date']]
 df.dropna(inplace=True)
-df.to_csv('./Melon/08_album_art/RandM_album_art.csv', index = False)
+df.to_csv('../Melon/08_album_info/RandM_track_data.csv', index = False)
 df.info()
 print(df.head())
-

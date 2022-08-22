@@ -7,7 +7,7 @@ music_genre_lst = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Pop
 for i in range(0, 10):
 
     gn = music_genre_lst[i]
-    df = pd.read_csv('./Melon/05_6emo_data/{}_lyric_and_emo.csv'.format(gn))
+    df = pd.read_csv('../Melon/05_6emo_data/{}_lyric_and_emo.csv'.format(gn))
 
     # ---- 한국어 가사 stopwords ----
     df_stopwords = pd.read_csv('../Melon/06_lyric_preprocessing_data/melon_lyrics_kor_stopwords.csv')
@@ -20,7 +20,7 @@ for i in range(0, 10):
     okt = Okt()
     Korean_lyric = []
 
-    for lyrics in df.lyric[:3]:
+    for lyrics in df.lyric:
         # -- lyric에서 [가-힣 ] 제외하고 모두 공백으로 대체 --
         lyrics = re.sub('[^가-힣 ]', ' ', lyrics)
 
@@ -43,7 +43,7 @@ for i in range(0, 10):
 
 
     df['Clean_lyric'] = Korean_lyric
-    df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'danceability', 'energy', 'loudness', 'acousticness', 'valence', 'tempo']]
+    df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'track_url']]
     df.dropna(inplace=True)
-    df.to_csv('./Melon/06_lyric_preprocessing_data/KOR/{}_clean_kr_lyric.csv'.format(gn), index=False)
+    df.to_csv('../Melon/06_lyric_preprocessing_data/KOR/{}_clean_kr_lyric.csv'.format(gn), index=False)
     df.info()

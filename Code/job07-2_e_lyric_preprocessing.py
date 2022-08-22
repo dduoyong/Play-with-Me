@@ -12,7 +12,7 @@ music_genre_list = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Po
 for i in range(0, 10):
 
     gn = music_genre_list[i]
-    df = pd.read_csv('./Melon/05_6emo_data/{}_lyric_and_emo.csv'.format(gn))
+    df = pd.read_csv('../Melon/05_6emo_data/{}_lyric_and_emo.csv'.format(gn))
 
     # ---- 영어 가사 토큰화 및 불용어 제거 ----
     English_lyric = []
@@ -96,8 +96,8 @@ for i in range(0, 10):
 
 
     df['Clean_lyric'] = English_lyric
-    df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'danceability', 'energy', 'loudness', 'acousticness', 'valence', 'tempo']]
+    df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'track_url']]
     df.dropna(inplace=True)
-    df.to_csv('./Melon/06_lyric_preprocessing_data/ENG/{}_clean_eng_lyric.csv'.format(gn), index=False)
+    df.to_csv('../Melon/06_lyric_preprocessing_data/ENG/{}_clean_eng_lyric.csv'.format(gn), index=False)
     df.info()
 

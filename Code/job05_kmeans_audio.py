@@ -7,7 +7,7 @@ import seaborn as sns
 from yellowbrick.cluster import KElbowVisualizer
 
 
-df = pd.read_csv('../Melon/04_audio_features_data/Adultpop_lyric_and_audio.csv')
+df = pd.read_csv('../Melon/04_audio_features_data/RandM_lyric_and_audio.csv')
 # df.info()
 
 # ---- audio feature 변수 ----

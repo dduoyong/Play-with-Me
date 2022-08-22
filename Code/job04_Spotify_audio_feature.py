@@ -26,7 +26,7 @@ os.environ["SPOTIPY_CLIENT_ID"] = "input your client id"
 os.environ["SPOTIPY_CLIENT_SECRET"] = "input your client pw"
 
 
-df = pd.read_csv('../Melon/03_lyric_concat_data/RandM_lyric.csv')
+df = pd.read_csv('../Melon/03_lyric_concat_data/Adultpop_lyric.csv')
 df.info()
 # ---- 오류난 경우 해당 행 확인용 ----
 # print(df['track_id_url'][37])
@@ -48,7 +48,7 @@ for i in range(0, 1011):
     print(track_url_par)
 
     # -- track_id를 빈 리스트에 추가 --
-    track_id = str(track_url_par.path).split('/')[4]
+    track_id = str(track_url_par.path).split('/')[2]
     # adultpop_path='/track/6oHhbZ7H8Akb6YiejwDAVF' [2]
     # metal_path=' https://open.spotify.com/track/4E43XdK12qORYvIS4xfgAb' [4]
     print(track_id)
@@ -68,8 +68,9 @@ for i in range(0, 1011):
 
 
 df['track_id'] = track_id_list
-df = df[['artist', 'title', 'lyric', 'track_id']]
+df['track_url'] = df['track_id_url']
+df = df[['artist', 'title', 'lyric', 'track_url', 'track_id']]
 df = df.merge(audio_features, how='left', left_on='track_id', right_on='track_id').drop_duplicates()
 df.dropna(inplace=True)
-df.to_csv('./Melon/04_audio_features_data/RandM_lyric_and_audio.csv', index=False)
+df.to_csv('../Melon/04_audio_features_data/Adultpop_lyric_and_audio.csv', index=False)
 df.info()

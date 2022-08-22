@@ -19,4 +19,4 @@ for i in music_genre_list:
     df.info()
 
 
-    df.to_csv('./melon/03_lyric_concat_data/{}_lyric.csv'.format(i), index = False)
+    df.to_csv('./Melon/03_lyric_concat_data/{}_lyric.csv'.format(i), index = False)

@@ -18,8 +18,11 @@ scaled_data = pd.DataFrame(minmax_data, columns= ['danceability', 'energy', 'lou
 
 # ---- Heatmap ----
 cmap = sns.diverging_palette(220, 10, as_cmap=True)
-sns.heatmap(scaled_data.corr(),cmap=cmap)
+plt.figure(figsize=(10,10))
+plt.title('RandM Heatmamp', fontsize=10)
+sns.heatmap(scaled_data.corr(), cmap=cmap)
 plt.show()
+# exit()
 
 # ---- K-Means clustering ----
 cluster = KMeans(n_clusters = 6)
@@ -32,7 +35,7 @@ print(scaled_data.head())
 
 # ---- Bar plot ----
 fig = sns.barplot(x=scaled_data['cluster_label'].value_counts().index, y=scaled_data['cluster_label'].value_counts())
-plt.title('Cluster label 별 곡 수')
+plt.title('RandM cluster label ratio')
 plt.ylabel('')
 fig = fig.get_figure()
 fig.set_size_inches(15, 9)
@@ -42,7 +45,7 @@ plt.show()
 
 # ---- 감정 match ----
 # -- cluster label 별 counts --
-label_origin = ['Energetic', 'Happy', 'Comfortable', 'Monotonic', 'Depressed', 'Sad']
+label_origin = ['Energetic', 'Happy', 'Comfortable', 'Chilling', 'Depressed', 'Sad']
 print(scaled_data['cluster_label'].value_counts())
 
 # -- label 별 'valance'값 평균 & rename --
@@ -65,6 +68,6 @@ print(scaled_data.head())
 
 
 df['emo'] = scaled_data['emo']
-df = df[['artist','title','lyric','emo','track_id','danceability','energy','loudness','acousticness','valence','tempo']]
-df.to_csv('./Melon/05_6emo_data/RandM_lyric_and_emo.csv', index=False)
+df = df[['artist', 'title', 'lyric', 'emo', 'track_id', 'track_url']]
+df.to_csv('../Melon/05_6emo_data/RandM_lyric_and_emo.csv', index=False)
 df.info()
