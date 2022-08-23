@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import uic
+from PyQt5.Qt import QApplication, QUrl, QDesktopServices
 import pandas as pd
 from gensim.models import Word2Vec
 from scipy.io import mmread
@@ -66,6 +67,10 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_title_6.clicked.connect(self.show_album_art)
         self.btn_title_7.clicked.connect(self.show_album_art)
 
+
+        # 재생버튼
+        self.btn_play.clicked.connect(self.play_music)
+
         gn = main_window.selected[0]
         # print(gn)
 
@@ -86,6 +91,8 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.le_word.setCompleter(completer)
 
 
+
+
     # ---- 감정 recommendation ----
     def energetic_reco(self):
         reco_list = self.recom_by_keyword(self.main_window.selected[1])
@@ -96,16 +103,47 @@ class secondwindow(QDialog, QWidget, emo_window):
         if num >= 7 : num = 7
         for i in range(num):
             self.buttons[i].setText(reco_list.iloc[i, 0] + '- ' + reco_list.iloc[i, 1])
+            # self.buttons[i].clicked.connect(lambda: webbrowser.open(reco_list.iloc[i, 4]))
 
     def happy_reco(self):
-        reco_list = self.recom_by_keyword(self.main_window.selected[1])
-        print(reco_list)
-        reco_list = reco_list[reco_list['emo'] == 'Happy']
-        reco_list.info()
-        num = len(reco_list)
+        self.reco_list = self.recom_by_keyword(self.main_window.selected[1])
+        print(self.reco_list)
+        self.reco_list = self.reco_list[self.reco_list['emo'] == 'Happy']
+        self.reco_list.info()
+        num = len(self.reco_list)
         if num >= 7 : num = 7
         for i in range(num):
-            self.buttons[i].setText(reco_list.iloc[i, 0] + '- ' + reco_list.iloc[i, 1])
+            self.buttons[i].setText(self.reco_list.iloc[i, 0] + '-' + self.reco_list.iloc[i, 1])
+
+
+    def show_album_art(self):
+        btn = self.sender()
+        title = btn.text().split('-')[-1]
+
+        # Web에서 Image 정보 로드
+        urlString = self.reco_list[self.reco_list['title'] == title]['album_art']
+        urlString = list(urlString)[0]
+        # print(urlString)
+
+        imageFromWeb = urllib.request.urlopen(urlString).read()
+        # print(type(imageFromWeb))
+
+        # 웹에서 Load한 Image를 이용하여 QPixmap에 사진데이터를 Load하고, Label을 이용하여 화면에 표시
+        pixmap = QPixmap()
+        pixmap.loadFromData(imageFromWeb)
+        # print(pixmap)
+        self.lbl_album_art.setPixmap(pixmap)
+
+    def play_music(self):
+        btn = self.sender()
+        title = btn.text().split('-')[-1]
+        track_url = self.reco_list[self.reco_list['title'] == title]['track_url']
+        print('title:', title)
+        print(track_url)
+        # track_url = list(track_url)
+        print('track_url:', track_url)
+        url = QUrl('track_url')
+        QDesktopServices.openUrl(url)
 
     def comfortable_reco(self):
         reco_list = self.recom_by_keyword(self.main_window.selected[1])
@@ -116,6 +154,7 @@ class secondwindow(QDialog, QWidget, emo_window):
         if num >= 7 : num = 7
         for i in range(num):
             self.buttons[i].setText(reco_list.iloc[i, 0] + '- ' + reco_list.iloc[i, 1])
+
 
     def chilling_reco(self):
         reco_list = self.recom_by_keyword(self.main_window.selected[1])
@@ -148,9 +187,6 @@ class secondwindow(QDialog, QWidget, emo_window):
             self.buttons[i].setText(reco_list.iloc[i, 0] + '- ' + reco_list.iloc[i, 1])
 
 
-    # ---- album art 이미지 띄우기 ----
-
-
 
 
     def home(self):
@@ -178,7 +214,8 @@ class secondwindow(QDialog, QWidget, emo_window):
             cosine_sim = linear_kernel(sentence_vec, self.Tfidf_matrix)
             recommendation = self.getRecommendation(cosine_sim)
             recommendation['emo'] = self.df['emo']
-
+            recommendation['track_url'] = self.df['track_url']
+            recommendation['album_art'] = self.df['album_art']
             print(recommendation)
             return recommendation
         else:
@@ -199,6 +236,7 @@ class secondwindow(QDialog, QWidget, emo_window):
         print(artistIdx)
         recSongList = self.df.iloc[artistIdx, [0, 1]]
         print(recSongList)
+
         return recSongList
 
 
