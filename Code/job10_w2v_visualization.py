@@ -7,22 +7,22 @@ import matplotlib as mpl
 
 
 # # ---- 폰트 지정 ----
-# font_path = './malgun.ttf'
-# font_name = font_manager.FontProperties(fname= font_path).get_name()
-# mpl.rcParams['axes.unicode_minus'] = False
-# rc('font', family = font_name)
+font_path = 'C:\Windows\Fonts\gulim.ttc'
+font_name = font_manager.FontProperties(fname= font_path).get_name()
+mpl.rcParams['axes.unicode_minus'] = False
+rc('font', family = font_name)
 
 
 music_genre_lst = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Pop', 'RandB_S', 'RandH', 'RandM']
 
-for i in range(0, 1):
+for i in range(1, 2):
 
     gn = music_genre_lst[i]
 
     # ---- 장르별 생성된 Word2Vec 모델 불러오기 ----
     embedding_model = Word2Vec.load('../Melon/Models/{}_w2v.model'.format(gn))
     # ---- sim word 확인 ----
-    key_word = 'love'
+    key_word = '이별'
     sim_word = embedding_model.wv.most_similar(key_word, topn=10)
     print(sim_word)
 
