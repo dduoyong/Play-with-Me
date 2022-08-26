@@ -13,7 +13,7 @@ from sklearn.metrics.pairwise import linear_kernel
 from gensim.models import Word2Vec
 import webbrowser
 import urllib.request
-import music_player_second_window
+import job16_music_player_second_window
 # from konlpy.tag import Okt
 # import re
 
@@ -41,6 +41,10 @@ class Exam(QWidget, gn_window):
         self.lbl_rockmetal.setPixmap(QtGui.QPixmap('./PyQt_imgs/rockmetal.png'))
         # 프로필 이미지
         self.lbl_profile.setPixmap(QtGui.QPixmap('./PyQt_imgs/profile.png'))
+        # 카테고리 이미지
+        self.btn_playlist.setIcon(QtGui.QIcon('./PyQt_imgs/playlist.png'))
+        self.btn_toplist.setIcon(QtGui.QIcon('./PyQt_imgs/headphone.png'))
+        self.btn_favorites.setIcon(QtGui.QIcon('./PyQt_imgs/vinyl.png'))
 
         # ---- 버튼 설정 ----
         # 장르 버튼
@@ -62,33 +66,15 @@ class Exam(QWidget, gn_window):
         self.hide()
         self.second = music_player_second_window.secondwindow(self)
         self.second.exec()
+
+        if self.second.return_value == 0:
+
+            self.le_keyword.setPlaceholderText('다른 키워드를 입력하세요')
+        else:
+
+            self.le_keyword.setPlaceholderText('키워드를 입력하세요')
+        self.le_keyword.setText('')
         self.show()
-
-
-
-
-
-
-
-
-class APP(QMainWindow):
-    def __init__(self):
-
-        # 버튼에 링크 추가하기
-        self.btn_title_1.clicked.connect(lambda: webbrowser.open('df[track_url][i]'))
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
