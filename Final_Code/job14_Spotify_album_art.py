@@ -12,9 +12,6 @@ client_id = "input your client id"
 client_pw = "input your client pw"
 endpoint = "https://accounts.spotify.com/api/token"
 
-rURI = "http://localhost:3000"
-scope = "ugc-image-upload"
-
 encoded = base64.b64encode("{}:{}".format(client_id, client_pw).encode('utf-8')).decode('ascii')
 
 headers = {"Authorization": "Basic {}".format(encoded)}
@@ -31,7 +28,7 @@ os.environ["SPOTIPY_CLIENT_SECRET"] = "input your client pw"
 
 # ---- 장르별 파일 불러오기 ----
 # music_genre_lst = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Pop', 'RandB_S', 'RandH', 'RandM']
-df = pd.read_csv('../Melon/07_clean_gn_concat/RandM_fin.csv')
+df = pd.read_csv('../Melon_Data/07_clean_gn_concat/RandM_fin.csv')
 track_id = df['track_id']
 
 album_art = []
@@ -81,6 +78,6 @@ df['album_art'] = album_art
 df['release_date'] = release_date
 df = df[['artist', 'title', 'Clean_lyric', 'emo', 'track_id', 'track_url', 'album_art', 'release_date']]
 df.dropna(inplace=True)
-df.to_csv('../Melon/08_album_info/RandM_track_data.csv', index = False)
+df.to_csv('../Melon_Data/08_album_info/RandM_track_data.csv', index = False)
 df.info()
 print(df.head())

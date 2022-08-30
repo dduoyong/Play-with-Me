@@ -20,7 +20,7 @@ for i in range(1, 2):
     gn = music_genre_lst[i]
 
     # ---- 장르별 생성된 Word2Vec 모델 불러오기 ----
-    embedding_model = Word2Vec.load('../Melon/Models/{}_w2v.model'.format(gn))
+    embedding_model = Word2Vec.load('../Melon_Data/Models/{}_w2v.model'.format(gn))
     # ---- sim word 확인 ----
     key_word = '이별'
     sim_word = embedding_model.wv.most_similar(key_word, topn=10)

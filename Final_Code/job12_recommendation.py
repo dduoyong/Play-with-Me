@@ -18,13 +18,13 @@ def getRecommendation(cosin_sim):
 
 # music_genre_lst = ['Adultpop', 'Ballad', 'Dance', 'FandB', 'Idol', 'Indie', 'Pop', 'RandB_S', 'RandH', 'RandM']
 # -- df_lyrics, matrix, pickle, model 명 같은 장르로 바꾸기 --
-df_lyrics = pd.read_csv('../Melon/07_clean_gn_concat/RandM_fin.csv')
-Tfidf_matrix = mmread('../Melon/Models/Tfidf_RandM_lyric.mtx').tocsr()
+df_lyrics = pd.read_csv('../Melon_Data/07_clean_gn_concat/RandM_fin.csv')
+Tfidf_matrix = mmread('../Melon_Data/Models/Tfidf_RandM_lyric.mtx').tocsr()
 
-with open('../Melon/Models/RandM_tfidf.pickle', 'rb') as f:
+with open('../Melon_Data/Models/RandM_tfidf.pickle', 'rb') as f:
     Tfidf = pickle.load(f)
 
-embedding_model = Word2Vec.load('../Melon/Models/RandM_w2v.model')
+embedding_model = Word2Vec.load('../Melon_Data/Models/RandM_w2v.model')
 
 # ---- keyeord 이용 음악 추천 ----
 keyword = '여행'

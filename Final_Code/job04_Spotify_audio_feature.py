@@ -26,7 +26,7 @@ os.environ["SPOTIPY_CLIENT_ID"] = "input your client id"
 os.environ["SPOTIPY_CLIENT_SECRET"] = "input your client pw"
 
 
-df = pd.read_csv('../Melon/03_lyric_concat_data/Adultpop_lyric.csv')
+df = pd.read_csv('../Melon_Data/03_lyric_concat_data/Adultpop_lyric.csv')
 df.info()
 # ---- 오류난 경우 해당 행 확인용 ----
 # print(df['track_id_url'][37])
@@ -62,7 +62,7 @@ for i in range(0, 1011):
     features = spotify.audio_features(tracks=track_id)[0]
 
     audio_features = audio_features.append({"track_id": track_id, "danceability":features['danceability'], "energy":features['energy'],
-                                            "loudness":features['loudness'], "mode":features['mode'], "acousticness":features['acousticness'],
+                                            "loudness":features['loudness'], "acousticness":features['acousticness'],
                                             "valence":features['valence'], "tempo":features['tempo']}, ignore_index=True)
     print(features)
 
@@ -72,5 +72,5 @@ df['track_url'] = df['track_id_url']
 df = df[['artist', 'title', 'lyric', 'track_url', 'track_id']]
 df = df.merge(audio_features, how='left', left_on='track_id', right_on='track_id').drop_duplicates()
 df.dropna(inplace=True)
-df.to_csv('../Melon/04_audio_features_data/Adultpop_lyric_and_audio.csv', index=False)
+df.to_csv('../Melon_Data/04_audio_features_data/Adultpop_lyric_and_audio.csv', index=False)
 df.info()

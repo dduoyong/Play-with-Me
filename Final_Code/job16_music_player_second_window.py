@@ -85,20 +85,20 @@ class secondwindow(QDialog, QWidget, emo_window):
         # ---- 장르 모델 및 csv 파일 불러오기 ----
         gn = main_window.selected[0]
         # print(gn)
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_{}_lyric.mtx'.format(gn)).tocsr()
-        with open('./Melon/Models/{}_tfidf.pickle'.format(gn), 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_{}_lyric.mtx'.format(gn)).tocsr()
+        with open('./Melon_Data/Models/{}_tfidf.pickle'.format(gn), 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/{}_w2v.model'.format(gn))
-        self.df = pd.read_csv('./Melon/08_album_info/{}_track_data.csv'.format(gn))
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/{}_w2v.model'.format(gn))
+        self.df = pd.read_csv('./Melon_Data/08_album_info/{}_track_data.csv'.format(gn))
 
 
     # ---- 장르별 추천 ----
     def adultpop(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Adult Pop_lyric.mtx').tocsr()
-        with open('./Melon/Models/Adult Pop_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Adult Pop_lyric.mtx').tocsr()
+        with open('./Melon_Data/Models/Adult Pop_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Adult Pop_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Adult Pop_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Adult Pop_w2v.model')
+        self.df = pd.read_csv('./Melon_Data/08_album_info/Adult Pop_track_data.csv')
 
         # —- 장르 버튼 색상 변경 ——
         self.btn_adultpop.setStyleSheet('color:rgb(78, 159, 151)')
@@ -113,11 +113,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def ballad(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Ballad_lyric.mtx').tocsr()
-        with open('./Melon/Models/Ballad_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Ballad_lyric.mtx').tocsr()
+        with open('../Melon_Data/Models/Ballad_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Ballad_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Ballad_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Ballad_w2v.model')
+        self.df = pd.read_csv('../Melon_Data/08_album_info/Ballad_track_data.csv')
         self.btn_ballad.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -133,11 +133,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def dance(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Dance_lyric.mtx').tocsr()
-        with open('./Melon/Models/Dance_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Dance_lyric.mtx').tocsr()
+        with open('../Melon_Data/Models/Dance_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Dance_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Dance_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Dance_w2v.model')
+        self.df = pd.read_csv('../Melon_Data/08_album_info/Dance_track_data.csv')
         self.btn_dance.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -153,11 +153,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def fnb(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Fork Blues_lyric.mtx').tocsr()
-        with open('./Melon/Models/Fork Blues_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Fork Blues_lyric.mtx').tocsr()
+        with open('./Melon_Data/Models/Fork Blues_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Fork Blues_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Fork Blues_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Fork Blues_w2v.model')
+        self.df = pd.read_csv('./Melon_Data/08_album_info/Fork Blues_track_data.csv')
         self.btn_fnb.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -173,11 +173,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def indie(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Indie_lyric.mtx').tocsr()
-        with open('./Melon/Models/Indie_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Indie_lyric.mtx').tocsr()
+        with open('../Melon_Data/Models/Indie_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Indie_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Indie_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Indie_w2v.model')
+        self.df = pd.read_csv('../Melon_Data/08_album_info/Indie_track_data.csv')
         self.btn_indie.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -193,11 +193,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def idol(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Idol_lyric.mtx').tocsr()
-        with open('./Melon/Models/Idol_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Idol_lyric.mtx').tocsr()
+        with open('../Melon_Data/Models/Idol_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Idol_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Idol_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Idol_w2v.model')
+        self.df = pd.read_csv('../Melon_Data/08_album_info/Idol_track_data.csv')
         self.btn_idol.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -213,11 +213,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def hiphop(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Hip Hop_lyric.mtx').tocsr()
-        with open('./Melon/Models/Hip Hop_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Hip Hop_lyric.mtx').tocsr()
+        with open('./Melon_Data/Models/Hip Hop_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Hip Hop_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Hip Hop_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Hip Hop_w2v.model')
+        self.df = pd.read_csv('./Melon_Data/08_album_info/Hip Hop_track_data.csv')
         self.btn_hiphop.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -233,11 +233,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def pop(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Pop_lyric.mtx').tocsr()
-        with open('./Melon/Models/Pop_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Pop_lyric.mtx').tocsr()
+        with open('../Melon_Data/Models/Pop_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Pop_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Pop_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Pop_w2v.model')
+        self.df = pd.read_csv('../Melon_Data/08_album_info/Pop_track_data.csv')
         self.btn_pop.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -253,11 +253,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def rnb(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_RnB Soul_lyric.mtx').tocsr()
-        with open('./Melon/Models/RnB Soul_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_RnB Soul_lyric.mtx').tocsr()
+        with open('./Melon_Data/Models/RnB Soul_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/RnB Soul_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/RnB Soul_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/RnB Soul_w2v.model')
+        self.df = pd.read_csv('./Melon_Data/08_album_info/RnB Soul_track_data.csv')
         self.btn_rnb.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
@@ -273,11 +273,11 @@ class secondwindow(QDialog, QWidget, emo_window):
         self.btn_rockmetal.setStyleSheet('color:rgb(137, 137, 137)')
 
     def rockmetal(self):
-        self.Tfidf_matrix = mmread('./Melon/Models/Tfidf_Rock Metal_lyric.mtx').tocsr()
-        with open('./Melon/Models/Rock Metal_tfidf.pickle', 'rb') as f:
+        self.Tfidf_matrix = mmread('./Melon_Data/Models/Tfidf_Rock Metal_lyric.mtx').tocsr()
+        with open('./Melon_Data/Models/Rock Metal_tfidf.pickle', 'rb') as f:
             self.Tfidf = pickle.load(f)
-        self.embedding_model = Word2Vec.load('./Melon/Models/Rock Metal_w2v.model')
-        self.df = pd.read_csv('./Melon/08_album_info/Rock Metal_track_data.csv')
+        self.embedding_model = Word2Vec.load('./Melon_Data/Models/Rock Metal_w2v.model')
+        self.df = pd.read_csv('./Melon_Data/08_album_info/Rock Metal_track_data.csv')
         self.btn_rockmetal.setStyleSheet('color:rgb(78, 159, 151)')
 
         # —- 장르 버튼 색상 변경 ——
